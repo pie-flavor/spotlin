@@ -1,0 +1,13 @@
+
+* text=auto
+
+*.bat text eol=crlf
+gradlew text eol=lf
+*.sh text eol=lf
+pre-commit text eol=lf
+
+*.kt text
+*.kt diff=kotlin
+
+# Binary files that should not be modified
+*.jar binary

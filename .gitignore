@@ -1,0 +1,15 @@
+# IntelliJ
+.idea/
+*.iml
+/out/
+
+# Gradle
+.gradle/
+build/
+!gradle-wrapper.jar
+
+# Eclipse
+bin/
+.settings/
+.project
+.classpath
