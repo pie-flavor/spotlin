@@ -31,7 +31,6 @@ dependencies {
     compile "org.spongepowered:spongeapi:$spongeVersion"
     kapt "org.spongepowered:spongeapi:$spongeVersion"
     shadow 'org.jetbrains.kotlin:kotlin-stdlib-jre8'
-    shadow 'org.jetbrains.kotlin:kotlin-runtime'
     shadow 'org.jetbrains.kotlin:kotlin-reflect'
 }
 
