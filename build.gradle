@@ -46,7 +46,6 @@ sponge {
 
 shadowJar {
     configurations = [project.configurations.shadow]
-    relocate "kotlin", "spotlin"
     classifier = "$kotlinVersion" // Remove '-all' suffix
 }
 
