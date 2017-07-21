@@ -1,13 +1,28 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+
+buildscript {
+    ext.kotlin_version = '1.1.3-2'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
 plugins {
     id 'eclipse'
     id 'idea'
 
     id 'org.spongepowered.plugin' version '0.8.1'
-    id 'org.jetbrains.kotlin.jvm' version '1.1.3'
-    id 'org.jetbrains.kotlin.kapt' version '1.1.3'
     id 'com.github.johnrengelman.shadow' version '1.2.4'
     id 'net.minecrell.licenser' version '0.3'
 }
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
 
 group = pluginGroup
 version = pluginVersion
@@ -19,10 +34,10 @@ repositories {
 
 configurations {
     compile.extendsFrom shadow
+    compile.extendsFrom kapt
 }
 
 dependencies {
-    compile "org.spongepowered:spongeapi:$spongeVersion"
     kapt "org.spongepowered:spongeapi:$spongeVersion"
     shadow 'org.jetbrains.kotlin:kotlin-stdlib-jre8'
     shadow 'org.jetbrains.kotlin:kotlin-reflect'
@@ -38,8 +53,12 @@ sponge {
 }
 
 shadowJar {
+    ext {
+        spongeVersion = spongeVersion - '-SNAPSHOT'
+    }
+    archivesBaseName = "$project.name-$spongeVersion-$kotlinVersion"
     configurations = [project.configurations.shadow]
-    classifier = "$kotlinVersion" // Remove '-all' suffix
+    classifier = null
 }
 
 build.dependsOn shadowJar
@@ -52,5 +71,17 @@ license {
 compileKotlin {
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+}
+
+if (project.hasProperty('signing.keyId') &&
+        project.hasProperty('signing.password') &&
+        project.hasProperty('signing.secretKeyRingFile') &&
+        Files.exists(Paths.get((String)project.property('signing.secretKeyRingFile')))
+) {
+    apply plugin: 'signing'
+
+    signing {
+        sign configurations.archives
     }
 }
