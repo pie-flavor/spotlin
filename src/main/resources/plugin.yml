@@ -1,6 +1,0 @@
-authors: ['KingGoesGaming']
-description: '${description}'
-load: 'STARTUP'
-main: 'io.github.pxlpowered.spotlin.spigot.Spotlin'
-name: '${name}'
-version: '${version}'
