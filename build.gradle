@@ -14,17 +14,11 @@ version = pluginVersion
 
 repositories {
     mavenCentral()
-    maven {url "https://repo.spongepowered.org/maven/"}
-    maven {url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"}
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 configurations {
     compile.extendsFrom shadow
-}
-
-compileJava {
-    options.annotationProcessorPath = configurations.kapt
 }
 
 dependencies {
@@ -53,4 +47,10 @@ build.dependsOn shadowJar
 license {
     header = project.file('HEADER')
     include '**/*.kt'
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
