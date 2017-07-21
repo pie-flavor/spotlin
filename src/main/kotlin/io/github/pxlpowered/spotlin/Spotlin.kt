@@ -26,7 +26,7 @@ package io.github.pxlpowered.spotlin
 import com.google.inject.Inject
 import org.slf4j.Logger
 import org.spongepowered.api.event.Listener
-import org.spongepowered.api.event.game.state.GameLoadCompleteEvent
+import org.spongepowered.api.event.game.state.GamePreInitializationEvent
 import org.spongepowered.api.plugin.Plugin
 import org.spongepowered.api.plugin.PluginContainer
 
@@ -35,7 +35,7 @@ class Spotlin @Inject constructor(val container: PluginContainer,
                                     val logger: Logger) {
 
     @Listener
-    fun onGameStarted(@SuppressWarnings event: GameLoadCompleteEvent) {
+    fun onPreInit(e: GamePreInitializationEvent) {
         logger.info("=====================")
         logger.info("Using {} v{}, providing kotlin v{}",
                 container.name,
