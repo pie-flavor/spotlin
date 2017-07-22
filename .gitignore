@@ -13,6 +13,9 @@ bin/
 .project
 .classpath
 
+# Visual Studio Code
+.vscode/
+
 # OS stuff
 .DS_Store
 Thumbs.db
