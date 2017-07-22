@@ -20,7 +20,7 @@ In order to make sure your plugin both requires and loads after Spotlin, add thi
 ```kotlin
 @[Plugin(dependencies = arrayOf(Dependency(id = "spotlin", 
                                            optional = false, 
-                                           version = "0.1.0")))]
+                                           version = "0.1.1")))]
 class PluginClass
 ```
 
@@ -28,7 +28,7 @@ If you do not have the `kapt` plugin enabled, you will also need to add this to 
 ```json
 {
     "requiredMods": [
-        "spotlin@0.1.0"
+        "spotlin@0.1.1"
     ]
 }
 ```

@@ -30,7 +30,7 @@ import org.spongepowered.api.event.game.state.GamePreInitializationEvent
 import org.spongepowered.api.plugin.Plugin
 import org.spongepowered.api.plugin.PluginContainer
 
-@Plugin(id = "spotlin", name = "Spotlin", version = "0.1.0-SNAPSHOT", description = "Provides the Kotlin runtime for other plugins.")
+@Plugin(id = "spotlin", name = "Spotlin", version = "0.1.1", description = "Provides the Kotlin runtime for other plugins.")
 class Spotlin @Inject constructor(val container: PluginContainer,
                                     val logger: Logger) {
 
