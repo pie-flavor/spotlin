@@ -13,20 +13,20 @@ buildscript {
 plugins {
     id 'eclipse'
     id 'idea'
-
-    id 'org.spongepowered.plugin' version '0.8.1'
     id 'com.github.johnrengelman.shadow' version '1.2.4'
     id 'net.minecrell.licenser' version '0.3'
 }
 
 apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
 
 group = pluginGroup
 version = pluginVersion
 
 repositories {
     mavenCentral()
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url 'https://repo.spongepowered.org/maven/' }
 }
 
 configurations {
@@ -40,24 +40,16 @@ dependencies {
     shadow 'org.jetbrains.kotlin:kotlin-reflect'
 }
 
-sponge {
-    plugin {
-        id = pluginId
-        meta {
-            authors = ['KingGoesGaming', 'pie_flavor']
-        }
-    }
-}
-
 shadowJar {
     ext {
         spongeVersion = spongeVersion - '-SNAPSHOT'
     }
     archivesBaseName = "$project.name-$spongeVersion-$kotlinVersion"
     configurations = [project.configurations.shadow]
-    classifier = "rt"
+    classifier = null
 }
 
+jar.enabled = false
 build.dependsOn shadowJar
 
 license {
@@ -85,4 +77,6 @@ if (project.hasProperty('signing.keyId') &&
     signing {
         sign configurations.archives
     }
+
+    signArchives.dependsOn shadowJar
 }
