@@ -63,6 +63,10 @@ compileKotlin {
     }
 }
 
+artifacts {
+    archives shadowJar
+}
+
 if (project.hasProperty('signing.keyId') &&
         project.hasProperty('signing.password') &&
         project.hasProperty('signing.secretKeyRingFile') &&
@@ -70,9 +74,6 @@ if (project.hasProperty('signing.keyId') &&
 ) {
     apply plugin: 'signing'
 
-    artifacts {
-        archives shadowJar
-    }
 
     signing {
         sign configurations.archives
