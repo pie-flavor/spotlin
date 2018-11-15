@@ -44,7 +44,7 @@ shadowJar {
     ext {
         spongeVersion = spongeVersion - '-SNAPSHOT'
     }
-    archivesBaseName = "$project.name-$spongeVersion-$kotlinVersion-$pluginVersion"
+    archivesBaseName = "$project.name-$spongeVersion-$kotlinVersion"
     configurations = [project.configurations.shadow]
     classifier = null
 }
