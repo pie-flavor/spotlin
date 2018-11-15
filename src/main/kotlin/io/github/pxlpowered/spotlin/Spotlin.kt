@@ -30,7 +30,8 @@ import org.spongepowered.api.event.game.state.GamePreInitializationEvent
 import org.spongepowered.api.plugin.Plugin
 import org.spongepowered.api.plugin.PluginContainer
 
-@Plugin(id = "spotlin", name = "Spotlin", version = "0.1.3", description = "Provides the Kotlin runtime for other plugins.")
+@Suppress("UNUSED_PARAMETER")
+@Plugin(id = "spotlin", name = "Spotlin", version = "0.2.0", description = "Provides the Kotlin runtime for other plugins.")
 class Spotlin @Inject constructor(val container: PluginContainer,
                                     val logger: Logger) {
 
@@ -40,7 +41,7 @@ class Spotlin @Inject constructor(val container: PluginContainer,
         logger.info("Using {} v{}, providing kotlin v{}",
                 container.name,
                 if (container.version.isPresent) container.version.get() else "unknown",
-                "1.1.3")
+                "1.3.0")
         logger.info("=====================")
     }
 }
