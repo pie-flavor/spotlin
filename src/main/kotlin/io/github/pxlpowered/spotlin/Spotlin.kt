@@ -44,4 +44,5 @@ class Spotlin @Inject constructor(val container: PluginContainer,
                 "1.3.0")
         logger.info("=====================")
     }
+
 }
