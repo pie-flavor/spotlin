@@ -1,10 +1,10 @@
+import org.spongepowered.gradle.plugin.config.PluginLoaders
+import org.spongepowered.plugin.metadata.PluginDependency
+
 plugins {
-    eclipse
-    idea
-    id("com.github.johnrengelman.shadow") version "5.1.0"
-    id("net.minecrell.licenser") version "0.3"
-    kotlin("jvm") version "1.3.40"
-    kotlin("kapt") version "1.3.40"
+    kotlin("jvm") version "1.4.21"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
+    id("org.spongepowered.gradle.plugin") version "1.1.1"
     id("flavor.pie.promptsign") version "1.1.0"
 }
 
@@ -18,19 +18,29 @@ version = pluginVersion
 
 repositories {
     mavenCentral()
-    jcenter()
-    maven {
-        url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-    }
-    maven {
-        url = uri("https://repo.spongepowered.org/maven/")
+}
+
+sponge {
+    apiVersion("8.0.0")
+    plugin("spotlin") {
+        loader(PluginLoaders.JAVA_PLAIN)
+        displayName("Soulbound")
+        mainClass("io.github.pxlpowered.spotlin.Spotlin")
+        version(project.version as String?)
+        description("Provides the Kotlin runtime for other plugins.")
+        links {
+            homepage("https://github.com/pie-flavor/spotlin")
+            source("https://github.com/pie-flavor/spotlin")
+            issues("https://github.com/pie-flavor/spotlin/issues")
+        }
+        dependency("spongeapi") {
+            loadOrder(PluginDependency.LoadOrder.AFTER)
+            optional(false)
+        }
     }
 }
 
 dependencies {
-    val sponge = create("org.spongepowered:spongeapi:$spongeVersion")
-    api(sponge)
-    kapt(sponge)
     val stdlib = create(kotlin("stdlib-jdk8"))
     api(stdlib)
     shadow(stdlib)
@@ -59,19 +69,10 @@ tasks.build {
     dependsOn(tasks.shadowJar.get())
 }
 
-license {
-    header = project.file("HEADER")
-    include("**/*.kt")
-}
-
 tasks.compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-}
-
-kapt {
-    includeCompileClasspath = false
 }
 
 artifacts {

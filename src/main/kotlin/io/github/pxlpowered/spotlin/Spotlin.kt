@@ -24,24 +24,23 @@
 package io.github.pxlpowered.spotlin
 
 import com.google.inject.Inject
-import org.slf4j.Logger
+import org.apache.logging.log4j.Logger
 import org.spongepowered.api.event.Listener
-import org.spongepowered.api.event.game.state.GamePreInitializationEvent
-import org.spongepowered.api.plugin.Plugin
-import org.spongepowered.api.plugin.PluginContainer
+import org.spongepowered.api.event.lifecycle.ConstructPluginEvent
+import org.spongepowered.plugin.PluginContainer
+import org.spongepowered.plugin.jvm.Plugin
 
 @Suppress("UNUSED_PARAMETER")
-@Plugin(id = "spotlin", name = "Spotlin", version = "0.2.0", description = "Provides the Kotlin runtime for other plugins.")
-class Spotlin @Inject constructor(val container: PluginContainer,
-                                    val logger: Logger) {
+@Plugin("spotlin")
+class Spotlin @Inject internal constructor(private val container: PluginContainer, private val logger: Logger) {
 
     @Listener
-    fun onPreInit(e: GamePreInitializationEvent) {
+    fun onPreInit(e: ConstructPluginEvent) {
         logger.info("=====================")
         logger.info("Using {} v{}, providing kotlin v{}",
-                container.name,
-                if (container.version.isPresent) container.version.get() else "unknown",
-                "1.3.0")
+        container.metadata().id(),
+        if (!container.metadata().version().isNullOrEmpty()) container.metadata().version() else "unknown",
+        "1.3.0")
         logger.info("=====================")
     }
 
