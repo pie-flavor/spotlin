@@ -1,5 +1,5 @@
 import org.spongepowered.gradle.plugin.config.PluginLoaders
-import org.spongepowered.plugin.metadata.PluginDependency
+import org.spongepowered.plugin.metadata.model.PluginDependency
 
 plugins {
     kotlin("jvm") version "1.4.21"
@@ -21,11 +21,15 @@ repositories {
 }
 
 sponge {
-    apiVersion("8.0.0")
+    apiVersion("8.0.0-SNAPSHOT")
+    license("CHANGEME")
+    loader {
+        name(PluginLoaders.JAVA_PLAIN)
+        version("1.0")
+    }
     plugin("spotlin") {
-        loader(PluginLoaders.JAVA_PLAIN)
         displayName("Soulbound")
-        mainClass("io.github.pxlpowered.spotlin.Spotlin")
+        entrypoint("io.github.pxlpowered.spotlin.Spotlin")
         version(project.version as String?)
         description("Provides the Kotlin runtime for other plugins.")
         links {
