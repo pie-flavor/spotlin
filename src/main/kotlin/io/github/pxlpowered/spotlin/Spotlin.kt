@@ -28,7 +28,7 @@ import org.apache.logging.log4j.Logger
 import org.spongepowered.api.event.Listener
 import org.spongepowered.api.event.lifecycle.ConstructPluginEvent
 import org.spongepowered.plugin.PluginContainer
-import org.spongepowered.plugin.jvm.Plugin
+import org.spongepowered.plugin.builtin.jvm.Plugin
 
 @Suppress("UNUSED_PARAMETER")
 @Plugin("spotlin")
@@ -39,9 +39,10 @@ class Spotlin @Inject internal constructor(private val container: PluginContaine
         logger.info("=====================")
         logger.info("Using {} v{}, providing kotlin v{}",
         container.metadata().id(),
-        if (!container.metadata().version().isNullOrEmpty()) container.metadata().version() else "unknown",
+        container.metadata().version(),
         "1.3.0")
         logger.info("=====================")
     }
 
 }
+
